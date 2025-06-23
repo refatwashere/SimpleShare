@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings</title>
+  <style>
+    :root[data-theme='dark'] {
+      --bg: #202020;
+      --fg: #ffffff;
+      --accent: #03dac5;
+      --fg-alt: #cfcfcf;
+      --hover: #2c2c2c;
+    }
+
+    :root[data-theme='light'] {
+      --bg: #ffffff;
+      --fg: #111111;
+      --accent: #6200ee;
+      --fg-alt: #333333;
+      --hover: #f0f0f0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: var(--hover);
+      padding: 2rem 1rem;
+      border-right: 1px solid var(--fg-alt);
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+
+    .main {
+      flex-grow: 1;
+      padding: 2rem 3rem;
+    }
+
+    .setting {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .setting label {
+      font-size: 1rem;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+    }
+
+    select {
+      font-size: 1rem;
+      padding: 0.4rem;
+      background-color: var(--hover);
+      color: var(--fg);
+      border: 1px solid var(--fg-alt);
+      border-radius: 4px;
+    }
+
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: var(--accent);
+      color: var(--bg);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: var(--fg-alt);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>🔧 Settings</h2>
+    <p style="color: var(--fg-alt); font-size: 0.9rem;">Customize FileShare behavior</p>
+  </div>
+
+  <div class="main">
+    <div class="setting">
+      <label for="launchAtStartup">Launch at startup</label>
+      <input type="checkbox" id="launchAtStartup" />
+    </div>
+
+    <div class="setting">
+      <label for="showNotifications">Show notifications</label>
+      <input type="checkbox" id="showNotifications" />
+    </div>
+
+    <div class="setting">
+      <label for="minimizeToTray">Minimize to tray on close</label>
+      <input type="checkbox" id="minimizeToTray" />
+    </div>
+
+    <div class="setting">
+      <label for="theme">Theme</label>
+      <select id="theme">
+        <option value="system">🖥️ Use system preference</option>
+        <option value="dark">🌙 Dark</option>
+        <option value="light">☀️ Light</option>
+      </select>
+    </div>
+
+    <div class="buttons">
+      <button onclick="save()">💾 Save</button>
+      <button onclick="restartApp()" style="background-color: #666;">🔄 Restart App</button>
+    </div>
+  </div>
+
+  <script src="./settings.js"></script>
+</body>
+</html>

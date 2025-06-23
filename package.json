@@ -1,0 +1,58 @@
+{
+  "name": "lan-fileshare",
+  "version": "1.0.0",
+  "description": "A secure, local-first LAN file-sharing app with Electron and Express.",
+  "main": "main.js",
+  "author": "Refat",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "cors": "^2.8.5",
+    "electron-store": "^8.1.0",
+    "express": "^4.18.2",
+    "multer": "^2.0.0",
+    "ngrok": "^4.3.3",
+    "node-notifier": "^10.0.1",
+    "qrcode": "^1.5.3"
+  },
+  "devDependencies": {
+    "electron": "^28.3.3",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.refat.lanfileshare",
+    "productName": "LAN FileShare",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "assets/**/*",
+      "uploads/**/*",
+      "public/**/*",
+      "windows/**/*",
+      "server.js",
+      "main.js",
+      "preload.js",
+      "store.js",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "include": "build/installer.nsh",
+      "license": "build/license.txt",
+      "installerHeader": "build/installerHeader.bmp",
+      "installerSidebar": "build/installerSidebar.bmp"
+    }
+  }
+}
