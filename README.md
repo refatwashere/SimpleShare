@@ -1,5 +1,8 @@
-# Simple Share ~ By Refat
+---
 
+#  "***Simple Share ~ By Refat*** " 
+
+---
 A minimalist file transfer tool for local networks with a sleek dark UI, live previews, and QR sharing.
 
 ## Features
@@ -20,23 +23,23 @@ A minimalist file transfer tool for local networks with a sleek dark UI, live pr
 
 ## Settings panel
 +--------------------------+-------------------------+
-| 🔧 Settings              | [Section: Toggles]     |
-|--------------------------                        |
+| 🔧 Settings              | [Section: Toggles]      |
+|:------------------------ |:------------------------|
 | ▸ Launch at Startup      |  [ ✓ ] Launch          |
 | ▸ Show Notifications     |  [ ✓ ] Notify          |
 | ▸ Minimize to Tray       |  [ ✓ ] Minimize        |
 |                          |                         |
 |            [Save] Button |                         |
-+--------------------------+-------------------------+
+| |  |
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/refatwashere/lanshare.git
+   git clone https://github.com/refatwashere/SimpleShare.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd lanshare
+   cd SimpleShare
    ```
 3. Install dependencies:
    ```bash
