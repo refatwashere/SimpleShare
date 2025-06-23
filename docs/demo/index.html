@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Just Share</title>
+  <script src="./vendor/qrcode.min.js"></script>
+  <script src="./vendor/marked.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background-color: #1e1e1e;
+      padding: 2rem 1rem;
+      border-right: 1px solid #2c2c2c;
+    }
+    .sidebar h1 {
+      font-size: 1.5rem;
+      color: #03dac5;
+      margin-bottom: 1rem;
+    }
+    .sidebar small {
+      color: #888;
+    }
+    .content {
+      flex-grow: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .section h2 {
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+    input[type="file"] {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+      border: 1px solid #444;
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+    button {
+      background: var(--accent);
+      color: var(--fg);
+      border: none;
+      padding: 0.6rem 1rem;
+      margin-left: 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #018786;
+    }
+    .progress-container {
+      width: 100%;
+      background: #333;
+      border-radius: 4px;
+      margin-top: 10px;
+      height: 10px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background-color: #03dac5;
+      width: 0;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 0.5rem 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .file-icon {
+      margin-right: 6px;
+    }
+    a {
+      color: #bb86fc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    canvas {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1>📁 Just Share</h1>
+    <small>Secure LAN Portal</small>
+  </div>
+
+  <div class="content">
+    <div class="section">
+      <h2>Upload a File</h2>
+      <input type="file" id="fileInput" />
+      <button onclick="upload()">Upload</button>
+      <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+    </div>
+
+    <div class="section">
+      <h2>Shared Files</h2>
+      <ul id="fileList"></ul>
+    </div>
+
+    <div class="section">
+      <h2>Share Portal</h2>
+      <canvas id="qrCanvas"></canvas>
+      <p id="qrUrl" style="margin-top: 0.5rem; color: #ccc;"></p>
+    </div>
+  </div>
+
+<script>
+const server = 'http://localhost:3000';
+
+function getIconByExtension(ext) {
+  const icons = {
+    pdf: "📕", doc: "📘", docx: "📘", xls: "📊", xlsx: "📊",
+    png: "🖼️", jpg: "🖼️", jpeg: "🖼️", gif: "🖼️", txt: "📄",
+    md: "📝", zip: "🗜️", mp3: "🎵", wav: "🎵",
+    mp4: "🎞️", webm: "🎞️", default: "📁"
+  };
+  return icons[ext] || icons.default;
+}
+
+async function upload() {
+  const file = document.getElementById('fileInput').files[0];
+  if (!file) return alert('Please select a file!');
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `${server}/upload`);
+  xhr.upload.addEventListener('progress', e => {
+    if (e.lengthComputable) {
+      const percent = (e.loaded / e.total) * 100;
+      document.getElementById('progressBar').style.width = percent + '%';
+    }
+  });
+  xhr.onload = () => {
+    document.getElementById('progressBar').style.width = '0%';
+    fetchFiles();
+  };
+  xhr.send(formData);
+}
+
+async function fetchFiles() {
+  const res = await fetch(`${server}/files`);
+  const files = await res.json();
+  const list = document.getElementById('fileList');
+  list.innerHTML = '';
+
+  files.forEach(file => {
+    const ext = file.split('.').pop().toLowerCase();
+    const fileUrl = `${server}/${file}`;
+    const icon = getIconByExtension(ext);
+    const li = document.createElement('li');
+
+    let previewHTML = '';
+
+    if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
+      previewHTML = `<br><img src="${fileUrl}" alt="${file}" style="max-width: 300px; margin-top: 5px;" />`;
+    } else if (['txt'].includes(ext)) {
+      previewHTML = `
+        <br><button onclick="togglePreview('${file}', 'text')">Toggle Preview</button>
+        <pre id="preview-${file}" style="background:#1e1e1e; padding:10px; display:none; margin-top:5px;"></pre>`;
+    } else if (ext === 'md') {
+      previewHTML = `
+        <br><button onclick="togglePreview('${file}', 'markdown')">Toggle Preview</button>
+        <div id="preview-${file}" style="background:#1e1e1e; padding:10px; display:none; margin-top:5px;"></div>`;
+    } else if (['mp3', 'wav'].includes(ext)) {
+      previewHTML = `<br><audio controls style="margin-top:5px;"><source src="${fileUrl}" type="audio/${ext}" /></audio>`;
+    } else if (['mp4', 'webm'].includes(ext)) {
+      previewHTML = `<br><video controls width="300" style="margin-top:5px;"><source src="${fileUrl}" type="video/${ext}" /></video>`;
+    }
+
+    li.innerHTML = `<span class="file-icon">${icon}</span> 
+      <a href="${fileUrl}" download>${file}</a>
+      ${previewHTML}`;
+    
+    list.appendChild(li);
+  });
+}
+
+async function togglePreview(filename, type) {
+  const box = document.getElementById(`preview-${filename}`);
+  const isVisible = box.style.display === 'block';
+
+  if (isVisible) {
+    box.style.display = 'none';
+    return;
+  }
+
+  const res = await fetch(`${server}/${filename}`);
+  const text = await res.text();
+
+  if (type === 'text') {
+    box.textContent = text;
+  } else if (type === 'markdown') {
+    box.innerHTML = marked.parse(text);
+  }
+
+  box.style.display = 'block';
+}
+
+function generateQRCode() {
+  fetch('https://api.ipify.org?format=json')
+    .then(res => res.json())
+    .then(data => {
+      const localURL = `http://${data.ip}:3000`;
+      document.getElementById('qrUrl').textContent = localURL;
+      QRCode.toCanvas(document.getElementById('qrCanvas'), localURL, {
+        color: {
+          dark: '#ffffff',
+          light: '#1e1e1e'
+        }
+      });
+    })
+    .catch(() => {
+      document.getElementById('qrUrl').textContent = 'Could not detect IP';
+    });
+}
+
+window.onload = () => {
+  fetchFiles();
+  generateQRCode();
+};
+</script>
+</body>
+</html>
