@@ -1,3 +1,10 @@
+# 📦 Just Share ~ by Refat
+
+![Electron](https://img.shields.io/badge/Electron-28.x-blue.svg)
+![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Platform](https://img.shields.io/badge/Platform-Windows%20only-blueviolet.svg)
+![Built With Love](https://img.shields.io/badge/Made%20with-%E2%9D%A4-red.svg)
 ---
 
 ## 📦 Just Share ~ by Refat
@@ -108,19 +115,20 @@ npm run dist
 ## 📸 Screenshots
 
 ### 🖥️ Main Web Portal Interface
-![Web preview](assets/screenshots/dashboard.png)
+![Web preview](docs/assets/screenshot-dashboard.png)
 
 ### ⚙️ Settings Panel
-![Settings](assets/screenshots/settings.png)
+![Settings](docs/assets/screenshot-settings.png)
 
 ### 🎨 Installer Wizard
-![Installer wizard](assets/screenshots/installer.png)
+![Installer wizard](docs/assets/screenshot-installer.png)
 
 ### 📱 Mobile QR Access
-![QR Code](assets/qr.png)
+![QR Code](docs/assets/screenshot-qr.png)
 
 ### 📦 Tray
-![Tray Icon](assets/screenshots/tray.png)
+![Tray Icon](docs/assets/screenshot-tray.png)
+
 ---
 ### 🙌 Credits
 
