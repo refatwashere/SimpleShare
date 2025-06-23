@@ -1,0 +1,20 @@
+ node_modules/
+ uploads/
+ .env
+roughwork/
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+*.pid
+dist/
+OldStructure/
+assets/
+build/
+roughwork/
+*.code-workspace
