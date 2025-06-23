@@ -5,7 +5,7 @@
   <title>Just Share ~ by Refat</title>
   <link rel="stylesheet" href="style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="assets/icon.png" />
+  <link rel="icon" href="./assets/icon.png" />
   <style>
     body {
   margin: 0;
@@ -79,7 +79,7 @@ footer {
     <img src="assets/icon.png" alt="App Logo" class="logo" />
     <h1>Just Share ~ by Refat</h1>
     <p>A private-first, beautifully simple file sharing tool for LAN and beyond.</p>
-    <a href="https://github.com/refatwashere/SimpleShare/releases/" class="cta">⬇️ Download for Windows</a>
+    <a href="https://github.com/refatwashere/SimpleShare/releases/latest" class="cta">⬇️ Download for Windows</a>
   </header>
 
   <section class="features">
@@ -99,9 +99,34 @@ footer {
     <img src="assets/screenshot-settings.png" alt="Settings Panel" />
     <img src="assets/screenshot-installer.png" alt="Installer Wizard" />
   </section>
+  <a href="demo/index.html" target="_blank" class="cta">🔗 Try the Web Preview</a>
+<section class="installation">
+  <h2>⚙️ Installation</h2>
+  <p>Download the installer and run <strong>Just Share Setup.exe</strong>. Follow the steps to choose your install location and preferences.</p>
+  <ul>
+    <li>Supports Windows 10/11</li>
+    <li>Creates desktop and Start menu shortcut</li>
+    <li>No account or setup needed</li>
+  </ul>
+</section>
 
+<section class="faq">
+  <h2>❓ FAQ</h2>
+  <h4>Is my data shared online?</h4>
+  <p>Nope. All transfers are local unless ngrok tunneling is manually enabled.</p>
+
+  <h4>What if I close the tray?</h4>
+  <p>The app stays running in the background. Right-click the tray icon to quit completely.</p>
+
+  <h4>Where do uploaded files go?</h4>
+  <p>They are stored in the <code>uploads/</code> folder alongside the app.</p>
+</section>
   <footer>
-    <p>Made with ❤️ by Refat • Open source on <a href="#">GitHub</a></p>
+    <p>
+  [![GitHub](https://img.shields.io/github/stars/refatwashere/SimpleShare?style=social)](https://github.com/refatwashere/SimpleShare)
+  Made with ❤️ by Refat • Open source on 
+  <a href="https://github.com/refatwashere/SimpleShare" target="_blank">GitHub</a>
+</p>
   </footer>
 </body>
 </html>
