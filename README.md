@@ -1,6 +1,6 @@
 ---
 
-#  "***Simple Share ~ By Refat*** " 
+#  "***Just Share ~ By Refat*** " 
 
 ---
 A minimalist file transfer tool for local networks with a sleek dark UI, live previews, and QR sharing.

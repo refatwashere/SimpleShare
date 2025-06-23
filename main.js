@@ -20,7 +20,7 @@ let mainWindow, tray, serverProcess;
 
 // 🔄 Handle auto-launch
 const autoLauncher = new AutoLaunch({
-  name: 'LAN FileShare',
+  name: 'Just Share',
   path: app.getPath('exe')
 });
 
@@ -38,7 +38,7 @@ function createTray(publicUrl) {
     { type: 'separator' },
     { label: 'Exit', click: () => app.quit() }
   ]);
-  tray.setToolTip('LAN FileShare');
+  tray.setToolTip('Just Share');
   tray.setContextMenu(menu);
 }
 
@@ -94,7 +94,7 @@ async function startApp() {
   // 🔔 Notification
   if (settings.showNotifications) {
     notifier.notify({
-      title: 'LAN FileShare Ready',
+      title: 'Just Share Ready',
       message: `Link copied to clipboard:\n${publicUrl}`,
       icon: path.join(__dirname, 'assets', 'icon.png')
     });

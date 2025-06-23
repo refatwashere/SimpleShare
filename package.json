@@ -1,5 +1,5 @@
 {
-  "name": "lan-fileshare",
+  "name": "Just Share",
   "version": "1.0.0",
   "description": "A secure, local-first LAN file-sharing app with Electron and Express.",
   "main": "main.js",
@@ -24,8 +24,8 @@
     "electron-builder": "^26.0.12"
   },
   "build": {
-    "appId": "com.refat.lanfileshare",
-    "productName": "LAN FileShare",
+    "appId": "com.refat.JustShare",
+    "productName": "Just Share",
     "directories": {
       "output": "dist"
     },

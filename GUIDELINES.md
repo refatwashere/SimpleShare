@@ -17,8 +17,8 @@ A secure, local-first file sharing app for Windows built with **Electron** + **E
 #### 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/lan-fileshare.git
-cd lan-fileshare
+git clone https://github.com/your-username/SimpleShare.git
+cd SimpleShare
 ```
 
 #### 2. **Install Dependencies**
