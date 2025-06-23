@@ -1,5 +1,5 @@
 {
-  "name": "Just Share",
+  "name": "just-share",
   "version": "1.0.0",
   "description": "A secure, local-first LAN file-sharing app with Electron and Express.",
   "main": "main.js",
@@ -54,5 +54,15 @@
       "installerHeader": "build/installerHeader.bmp",
       "installerSidebar": "build/installerSidebar.bmp"
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/refatwashere/SimpleShare.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/refatwashere/SimpleShare/issues"
+  },
+  "homepage": "https://github.com/refatwashere/SimpleShare#readme"
 }
