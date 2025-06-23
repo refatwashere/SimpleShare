@@ -1,3 +1,4 @@
+[![GitHub](https://img.shields.io/github/stars/refatwashere/SimpleShare?style=social)](https://github.com/refatwashere/SimpleShare)
 ---
 
 #  "***Just Share ~ By Refat*** " 
